@@ -69,6 +69,9 @@ public class BomgostoApplication implements CommandLineRunner{
 				.produtos(new ArrayList<>())
 				.build();
 		
+		cat1.getProdutos().addAll(Arrays.asList(p1, p2));
+		cat2.getProdutos().addAll(Arrays.asList(p3));
+		
 		p1.getCategorias().addAll(Arrays.asList(cat1));
 		p2.getCategorias().addAll(Arrays.asList(cat1));
 		p3.getCategorias().addAll(Arrays.asList(cat2));
