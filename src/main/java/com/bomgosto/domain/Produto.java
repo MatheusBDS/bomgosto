@@ -2,7 +2,9 @@ package com.bomgosto.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -25,7 +28,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {
+		"nome","tamanho","unidadeMedida","precoUnitario","imagem","categorias","itens"})
 @Builder
 @Entity
 public class Produto implements Serializable{
@@ -46,6 +50,8 @@ public class Produto implements Serializable{
 		joinColumns = @JoinColumn(name = "produto_id"), 
 		inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias;
-	
+
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> itens;
 
 }

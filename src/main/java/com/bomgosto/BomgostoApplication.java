@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +17,7 @@ import com.bomgosto.domain.Cidade;
 import com.bomgosto.domain.Cliente;
 import com.bomgosto.domain.Endereco;
 import com.bomgosto.domain.Estado;
+import com.bomgosto.domain.ItemPedido;
 import com.bomgosto.domain.Pagamento;
 import com.bomgosto.domain.PagamentoComCartao;
 import com.bomgosto.domain.PagamentoComDinheiro;
@@ -28,6 +30,7 @@ import com.bomgosto.repositories.CidadeRepository;
 import com.bomgosto.repositories.ClienteRepository;
 import com.bomgosto.repositories.EnderecoRepository;
 import com.bomgosto.repositories.EstadoRepository;
+import com.bomgosto.repositories.ItemPedidoRepository;
 import com.bomgosto.repositories.PagamentoRepository;
 import com.bomgosto.repositories.PedidoRepository;
 import com.bomgosto.repositories.ProdutoRepository;
@@ -58,6 +61,9 @@ public class BomgostoApplication implements CommandLineRunner {
     
     @Autowired
     private PagamentoRepository pagamentoRepository;
+    
+    @Autowired
+    private ItemPedidoRepository itemPedidoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(BomgostoApplication.class, args);
@@ -68,11 +74,11 @@ public class BomgostoApplication implements CommandLineRunner {
 
         // PRODUTOS
         Produto p1 = Produto.builder().nome("Pizza de Calabresa").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).build();
+                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p2 = Produto.builder().nome("Pizza de Frango").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).build();
+                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p3 = Produto.builder().nome("Suco de Laranja").tamanho("500").unidadeMedida("Milimetros")
-                .precoUnitario(new BigDecimal(3)).categorias(new ArrayList<>()).build();
+                .precoUnitario(new BigDecimal(3)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
 
         // CATEGORIAS
         Categoria cat1 = Categoria.builder().nome("Pizza").produtos(new ArrayList<>()).build();
@@ -132,6 +138,22 @@ public class BomgostoApplication implements CommandLineRunner {
         
         pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
         pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+        
+        ItemPedido ip1 = ItemPedido.builder().pedido(ped1).produto(p1).desconto(BigDecimal.valueOf(0))
+        		.quantidade(1).preco(BigDecimal.valueOf(2000)).build();
+        ItemPedido ip2 = ItemPedido.builder().pedido(ped1).produto(p3).desconto(BigDecimal.valueOf(0))
+        		.quantidade(2).preco(BigDecimal.valueOf(80)).build();
+        ItemPedido ip3 = ItemPedido.builder().pedido(ped2).produto(p2).desconto(BigDecimal.valueOf(100))
+        		.quantidade(1).preco(BigDecimal.valueOf(800)).build();
+        
+        ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+        ped2.getItens().addAll(Arrays.asList(ip3));
+        
+        p1.getItens().addAll(Arrays.asList(ip1));
+        p2.getItens().addAll(Arrays.asList(ip3));
+        p3.getItens().addAll(Arrays.asList(ip2));
+        
+        itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
         
     }
 
