@@ -1,6 +1,7 @@
 package com.bomgosto.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 
@@ -15,17 +16,19 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-public class PagamentoComCartao extends Pagamento implements Serializable {
+public class PagamentoComBoleto extends Pagamento implements Serializable {
     private static final long serialVersionUID = 1L;
-	
-	private Integer numeroParcelas;
+    
+    private Date dataVencimento;
+    
+	private Date dataPagamento;
 
 	@Builder
-	public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroParcelas) {
+	public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {
 		super(id, estado, pedido);
 		
-		this.numeroParcelas = numeroParcelas;
+		this.dataVencimento = dataVencimento;
+		this.dataPagamento = dataPagamento;
 	}
-	
-	
+
 }

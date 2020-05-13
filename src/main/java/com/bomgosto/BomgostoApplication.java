@@ -1,25 +1,35 @@
 package com.bomgosto;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import com.bomgosto.domain.Categoria;
 import com.bomgosto.domain.Cidade;
 import com.bomgosto.domain.Cliente;
 import com.bomgosto.domain.Endereco;
 import com.bomgosto.domain.Estado;
+import com.bomgosto.domain.Pagamento;
+import com.bomgosto.domain.PagamentoComCartao;
+import com.bomgosto.domain.PagamentoComDinheiro;
+import com.bomgosto.domain.Pedido;
 import com.bomgosto.domain.Produto;
+import com.bomgosto.domain.enums.EstadoPagamento;
 import com.bomgosto.domain.enums.TipoCliente;
 import com.bomgosto.repositories.CategoriaRepository;
 import com.bomgosto.repositories.CidadeRepository;
 import com.bomgosto.repositories.ClienteRepository;
 import com.bomgosto.repositories.EnderecoRepository;
 import com.bomgosto.repositories.EstadoRepository;
+import com.bomgosto.repositories.PagamentoRepository;
+import com.bomgosto.repositories.PedidoRepository;
 import com.bomgosto.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -42,6 +52,12 @@ public class BomgostoApplication implements CommandLineRunner {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+    
+    @Autowired
+    private PedidoRepository pedidoRepository;
+    
+    @Autowired
+    private PagamentoRepository pagamentoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(BomgostoApplication.class, args);
@@ -95,6 +111,28 @@ public class BomgostoApplication implements CommandLineRunner {
 
         clienteRepository.saveAll(Collections.singletonList(cli1));
         enderecoRepository.saveAll(Arrays.asList(e1, e2));
+        
+        //PEDIDOS
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        
+        Pedido ped1 = Pedido.builder().id(null).instante(sdf.parse("13/05/2020 13:01"))
+        		.cliente(cli1).enderecoDeEntrega(e1).build();
+        Pedido ped2 = Pedido.builder().id(null).instante(sdf.parse("10/10/2019 13:01"))
+        		.cliente(cli1).enderecoDeEntrega(e2).build();
+        
+        Pagamento pagto1 = PagamentoComCartao.builder().id(null).estado(EstadoPagamento.QUITADO).pedido(ped1)
+        		.numeroParcelas(6).build();
+        ped1.setPagamento(pagto1);
+        
+        Pagamento pagto2 = PagamentoComDinheiro.builder().id(null).estado(EstadoPagamento.PENDENTE).pedido(ped2)
+        		.dataPagamento(null).build();
+        ped2.setPagamento(pagto2);
+        
+        cli1.setPedidos(Arrays.asList(ped1, ped2));
+        
+        pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+        pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+        
     }
 
 }

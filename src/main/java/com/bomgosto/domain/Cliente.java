@@ -30,17 +30,21 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
     @Getter
     @Setter
     private String nome;
+    
     @Getter
     @Setter
     private String email;
+    
     @Getter
     @Setter
     private String cpfOuCnpj;
+    
     private Integer tipo;
-
+    
     @Getter
     @Setter
     @OneToMany(mappedBy = "cliente")
@@ -53,6 +57,11 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+    @Getter
+    @Setter
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
+    
     public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
         super();
         this.id = id;
@@ -62,12 +71,12 @@ public class Cliente implements Serializable {
         this.tipo = tipo.getCod();
     }
 
+    public void setTipo(TipoCliente tipo) {
+    	this.tipo = tipo.getCod();
+    }
+    
     public TipoCliente getTipo() {
         return TipoCliente.toEnum(tipo);
-    }
-
-    public void setTipo(TipoCliente tipo) {
-        this.tipo = tipo.getCod();
     }
 
 }

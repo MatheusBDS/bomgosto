@@ -12,7 +12,13 @@ public enum EstadoPagamento {
 	CANCELADO(3, "Cancelado");
 
 	private int cod;
+
 	private String descricao;
+
+//	private EstadoPagamento(int cod, String descricao) {
+//		this.cod = cod;
+//		this.descricao = descricao;
+//	}
 
 	public static EstadoPagamento toEnum(Integer cod) {
 		for (EstadoPagamento x : EstadoPagamento.values()) {
@@ -21,4 +27,5 @@ public enum EstadoPagamento {
 
 		throw new IllegalArgumentException("Id inválido: " + cod);
 	}
+
 }
