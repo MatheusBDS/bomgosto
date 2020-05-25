@@ -15,11 +15,6 @@ public enum EstadoPagamento {
 
 	private String descricao;
 
-//	private EstadoPagamento(int cod, String descricao) {
-//		this.cod = cod;
-//		this.descricao = descricao;
-//	}
-
 	public static EstadoPagamento toEnum(Integer cod) {
 		for (EstadoPagamento x : EstadoPagamento.values()) {
 			return cod.equals(x.getCod()) ? x : null;

@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 import com.bomgosto.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +20,7 @@ import lombok.Setter;
 public class PagamentoComDinheiro extends Pagamento implements Serializable {
     private static final long serialVersionUID = 1L;
 	
+    @JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataPagamento;
 
 	@Builder
