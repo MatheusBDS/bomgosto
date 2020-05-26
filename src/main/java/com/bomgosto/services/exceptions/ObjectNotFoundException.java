@@ -1,4 +1,4 @@
-package com.bomgosto.exceptions;
+package com.bomgosto.services.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
