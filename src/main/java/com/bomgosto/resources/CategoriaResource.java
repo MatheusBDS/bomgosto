@@ -1,6 +1,8 @@
 package com.bomgosto.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.bomgosto.domain.Categoria;
+import com.bomgosto.dto.CategoriaDTO;
 import com.bomgosto.services.CategoriaService;
 
 @RestController
@@ -55,6 +58,16 @@ public class CategoriaResource {
     	service.delete(id);
     	
     	return ResponseEntity.noContent().build();
+    }
+    
+    @GetMapping()
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        List<CategoriaDTO> listDTO = service.findAll()
+        		.stream()
+        		.map(c -> CategoriaDTO.builder().obj(c).build())
+        		.collect(Collectors.toList());
+        
+        return ResponseEntity.ok().body(listDTO);
     }
 
 }
