@@ -81,8 +81,19 @@ public class BomgostoApplication implements CommandLineRunner {
                 .precoUnitario(new BigDecimal(3)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
 
         // CATEGORIAS
-        Categoria cat1 = Categoria.builder().nome("Pizza").produtos(new ArrayList<>()).build();
-        Categoria cat2 = Categoria.builder().nome("Bebida").produtos(new ArrayList<>()).build();
+        Categoria cat1 = Categoria.builder().nome("Pizzas").produtos(new ArrayList<>()).build();
+        Categoria cat2 = Categoria.builder().nome("Bebidas").produtos(new ArrayList<>()).build();
+        Categoria cat3 = Categoria.builder().nome("Entradas").produtos(new ArrayList<>()).build();
+        Categoria cat4 = Categoria.builder().nome("À La Carte").produtos(new ArrayList<>()).build();
+        Categoria cat5 = Categoria.builder().nome("Peixes e Frutos do Mar").produtos(new ArrayList<>()).build();
+        Categoria cat6 = Categoria.builder().nome("Pratos Individuais").produtos(new ArrayList<>()).build();
+        Categoria cat7 = Categoria.builder().nome("Massas").produtos(new ArrayList<>()).build();
+        Categoria cat8 = Categoria.builder().nome("Lanches").produtos(new ArrayList<>()).build();
+        Categoria cat9 = Categoria.builder().nome("Crepes").produtos(new ArrayList<>()).build();
+        Categoria cat10 = Categoria.builder().nome("Sobremesas").produtos(new ArrayList<>()).build();
+        Categoria cat11 = Categoria.builder().nome("Sucos e Cremes").produtos(new ArrayList<>()).build();
+        Categoria cat12 = Categoria.builder().nome("Happy Hour").produtos(new ArrayList<>()).build();
+        
 
         cat1.getProdutos().addAll(Arrays.asList(p1, p2));
         cat2.getProdutos().addAll(Collections.singletonList(p3));
@@ -91,7 +102,7 @@ public class BomgostoApplication implements CommandLineRunner {
         p2.getCategorias().addAll(Collections.singletonList(cat1));
         p3.getCategorias().addAll(Collections.singletonList(cat2));
 
-        categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+        categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, cat9, cat10, cat11, cat12));
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 
         // ESTADOS
