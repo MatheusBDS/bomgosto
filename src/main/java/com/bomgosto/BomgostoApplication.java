@@ -119,9 +119,9 @@ public class BomgostoApplication implements CommandLineRunner {
                 TipoCliente.PESSOA_FISICA);
         cli1.getTelefones().addAll(Arrays.asList("992706077", "991289851"));
 
-        Endereco e1 = Endereco.builder().logadouro("QNO 13 CONJUNTO K").numero("09").complemento("SETOR O")
+        Endereco e1 = Endereco.builder().logradouro("QNO 13 CONJUNTO K").numero("09").complemento("SETOR O")
                 .bairro("CEILÂNDIA").cep("72255311").cidade(c1).cliente(cli1).build();
-        Endereco e2 = Endereco.builder().logadouro("QNO 03 CONJUNTO F").numero("33").complemento("SETOR O")
+        Endereco e2 = Endereco.builder().logradouro("QNO 03 CONJUNTO F").numero("33").complemento("SETOR O")
                 .bairro("CEILÂNDIA").cep("72255306").cidade(c1).cliente(cli1).build();
 
         cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
