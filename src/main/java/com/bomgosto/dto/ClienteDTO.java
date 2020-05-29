@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.bomgosto.domain.Cliente;
+import com.bomgosto.services.validation.ClienteUpdate;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -15,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@ClienteUpdate
 @Getter
 @Setter
 @NoArgsConstructor
