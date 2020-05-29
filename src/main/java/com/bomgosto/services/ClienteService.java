@@ -31,7 +31,6 @@ public class ClienteService {
     @Autowired
 	private EnderecoRepository enderecoRepository;
     
-    @Transactional
     public Cliente find(Integer id) {
         Optional<Cliente> obj = repo.findById(id);
 
@@ -39,6 +38,7 @@ public class ClienteService {
                 "Objeto não encontrado! Id " + id + ", Tipo: " + Cliente.class.getName()));
     }
 
+    @Transactional
     public Cliente insert(Cliente obj) {
 		obj.setId(null);
 		obj = repo.save(obj);
