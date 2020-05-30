@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 
 import com.bomgosto.domain.enums.EstadoPagamento;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,19 +20,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"estado", "pedido"})
+@EqualsAndHashCode(exclude = { "estado", "pedido" })
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Pagamento implements Serializable {
-    private static final long serialVersionUID = 1L;
-	
-    @Id
-    @Setter
-    @Getter
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Setter
+	@Getter
 	private Integer id;
-	
+
 	private Integer estado;
-	
+
 	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
@@ -50,10 +52,9 @@ public abstract class Pagamento implements Serializable {
 	public EstadoPagamento getEstado() {
 		return EstadoPagamento.toEnum(estado);
 	}
-	
+
 	public void setEstado(EstadoPagamento estado) {
 		this.estado = estado.getCod();
 	}
 
-	
 }

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 
 import com.bomgosto.domain.enums.EstadoPagamento;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
+@JsonTypeName("pagamentoComDinheiro")
 public class PagamentoComDinheiro extends Pagamento implements Serializable {
     private static final long serialVersionUID = 1L;
 	
