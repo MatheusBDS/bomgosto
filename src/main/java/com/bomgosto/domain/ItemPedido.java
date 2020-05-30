@@ -51,5 +51,9 @@ public class ItemPedido implements Serializable{
 		return id.getProduto();
 	}
 	
+	public BigDecimal getSubTotal() {
+		return preco.subtract(desconto).multiply(BigDecimal.valueOf(quantidade));
+	}
+	
 	
 }
