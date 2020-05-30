@@ -77,8 +77,30 @@ public class BomgostoApplication implements CommandLineRunner {
                 .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p2 = Produto.builder().nome("Pizza de Frango").tamanho("Grande").unidadeMedida("Gramas")
                 .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p3 = Produto.builder().nome("Suco de Laranja").tamanho("500").unidadeMedida("Milimetros")
+        Produto p3 = Produto.builder().nome("Suco de Laranja").tamanho("500").unidadeMedida("Mililitros")
                 .precoUnitario(new BigDecimal(3)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+        Produto p4 = Produto.builder().nome("Suco de Maracujá").tamanho("500").unidadeMedida("Mililitros")
+                .precoUnitario(new BigDecimal(3)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+        Produto p5 = Produto.builder().nome("Isca de Peixe").tamanho("N/A").unidadeMedida("Gramas")
+                .precoUnitario(new BigDecimal(39.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+        Produto p6 = Produto.builder().nome("Picanha na Chapa").tamanho("N/A").unidadeMedida("Gramas")
+                .precoUnitario(new BigDecimal(99.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+        Produto p7 = Produto.builder().nome("Camarão Cremoso").tamanho("N/A").unidadeMedida("Gramas")
+                .precoUnitario(new BigDecimal(99.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+        Produto p8 = Produto.builder().nome("Peito de Frango").tamanho("N/A").unidadeMedida("Gramas")
+                .precoUnitario(new BigDecimal(23.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+        Produto p9 = Produto.builder().nome("Lasanha de Carne").tamanho("N/A").unidadeMedida("Gramas")
+                .precoUnitario(new BigDecimal(29.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+        Produto p10 = Produto.builder().nome("X-Bom Gosto").tamanho("N/A").unidadeMedida("Gramas")
+                .precoUnitario(new BigDecimal(18.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+        Produto p11 = Produto.builder().nome("Foundue de Morango").tamanho("N/A").unidadeMedida("Gramas")
+                .precoUnitario(new BigDecimal(12.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+        Produto p12 = Produto.builder().nome("Champagne Chandon").tamanho("N/A").unidadeMedida("Mililitros")
+                .precoUnitario(new BigDecimal(129.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+        Produto p13 = Produto.builder().nome("Chopp Brahma").tamanho("N/A").unidadeMedida("Mililitros")
+                .precoUnitario(new BigDecimal(5.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+        Produto p14 = Produto.builder().nome("Carne Seca").tamanho("N/A").unidadeMedida("Gramas")
+                .precoUnitario(new BigDecimal(19.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
 
         // CATEGORIAS
         Categoria cat1 = Categoria.builder().nome("Pizzas").produtos(new ArrayList<>()).build();
@@ -96,14 +118,35 @@ public class BomgostoApplication implements CommandLineRunner {
         
 
         cat1.getProdutos().addAll(Arrays.asList(p1, p2));
-        cat2.getProdutos().addAll(Collections.singletonList(p3));
+        cat2.getProdutos().addAll(Collections.singletonList(p12));
+        cat3.getProdutos().addAll(Collections.singletonList(p5));
+        cat4.getProdutos().addAll(Collections.singletonList(p6));
+        cat5.getProdutos().addAll(Collections.singletonList(p7));
+        cat6.getProdutos().addAll(Collections.singletonList(p8));
+        cat7.getProdutos().addAll(Collections.singletonList(p9));
+        cat8.getProdutos().addAll(Collections.singletonList(p10));
+        cat9.getProdutos().addAll(Collections.singletonList(p14));
+        cat10.getProdutos().addAll(Collections.singletonList(p11));
+        cat11.getProdutos().addAll(Arrays.asList(p3, p4));
+        cat12.getProdutos().addAll(Collections.singletonList(p13));
 
         p1.getCategorias().addAll(Collections.singletonList(cat1));
         p2.getCategorias().addAll(Collections.singletonList(cat1));
-        p3.getCategorias().addAll(Collections.singletonList(cat2));
+        p3.getCategorias().addAll(Collections.singletonList(cat11));
+        p4.getCategorias().addAll(Collections.singletonList(cat11));
+        p5.getCategorias().addAll(Collections.singletonList(cat3));
+        p6.getCategorias().addAll(Collections.singletonList(cat4));
+        p7.getCategorias().addAll(Collections.singletonList(cat5));
+        p8.getCategorias().addAll(Collections.singletonList(cat6));
+        p9.getCategorias().addAll(Collections.singletonList(cat7));
+        p10.getCategorias().addAll(Collections.singletonList(cat8));
+        p11.getCategorias().addAll(Collections.singletonList(cat10));
+        p12.getCategorias().addAll(Collections.singletonList(cat2));
+        p13.getCategorias().addAll(Collections.singletonList(cat12));
+        p14.getCategorias().addAll(Collections.singletonList(cat9));
 
         categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, cat9, cat10, cat11, cat12));
-        produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+        produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14));
 
         // ESTADOS
         Estado est1 = Estado.builder().nome("Distrito Federal").cidades(new ArrayList<>()).build();
