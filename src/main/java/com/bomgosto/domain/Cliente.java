@@ -5,27 +5,28 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.bomgosto.domain.enums.Perfil;
 import com.bomgosto.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"nome", "email", "cpfOuCnpj", "tipo"})
 @Entity
 public class Cliente implements Serializable {
@@ -65,12 +66,21 @@ public class Cliente implements Serializable {
     @ElementCollection
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
+    
+    @ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
 
     @JsonIgnore
     @Getter
     @Setter
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
+    
+    @Builder
+    public Cliente() {
+    	addPerfil(Perfil.CLIENTE);
+    }
     
     @Builder
     public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
@@ -81,6 +91,7 @@ public class Cliente implements Serializable {
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = (tipo == null) ? null : tipo.getCod();
         this.senha = senha;
+        addPerfil(Perfil.CLIENTE);
     }
 
     public void setTipo(TipoCliente tipo) {
@@ -90,5 +101,12 @@ public class Cliente implements Serializable {
     public TipoCliente getTipo() {
         return TipoCliente.toEnum(tipo);
     }
-
+    
+    public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+    
+    public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
+	}
 }

@@ -24,6 +24,7 @@ import com.bomgosto.domain.PagamentoComDinheiro;
 import com.bomgosto.domain.Pedido;
 import com.bomgosto.domain.Produto;
 import com.bomgosto.domain.enums.EstadoPagamento;
+import com.bomgosto.domain.enums.Perfil;
 import com.bomgosto.domain.enums.TipoCliente;
 import com.bomgosto.repositories.CategoriaRepository;
 import com.bomgosto.repositories.CidadeRepository;
@@ -155,19 +156,27 @@ public class DBService {
         estadoRepository.saveAll(Collections.singletonList(est1));
         cidadeRepository.saveAll(Collections.singletonList(c1));
 
-        Cliente cli1 = new Cliente(null, "Matheus Silva", "matheusb565@gmail.com", "06680395151",
+        Cliente cli1 = new Cliente(null, "Matheus Silva", "matheusb565@gmail.com", "85633321120",
                 TipoCliente.PESSOA_FISICA, pe.encode("123"));
         cli1.getTelefones().addAll(Arrays.asList("992706077", "991289851"));
+        
+        Cliente cli2 = new Cliente(null, "Lisangela", "lisangela@gmail.com", "38566358155",
+                TipoCliente.PESSOA_FISICA, pe.encode("123"));
+        cli2.getTelefones().addAll(Arrays.asList("999991563", "985236547"));
+        cli2.addPerfil(Perfil.ADMIN);
 
         Endereco e1 = Endereco.builder().logradouro("QNO 13 CONJUNTO K").numero("09").complemento("SETOR O")
                 .bairro("CEILÂNDIA").cep("72255311").cidade(c1).cliente(cli1).build();
         Endereco e2 = Endereco.builder().logradouro("QNO 03 CONJUNTO F").numero("33").complemento("SETOR O")
                 .bairro("CEILÂNDIA").cep("72255306").cidade(c1).cliente(cli1).build();
+        Endereco e3 = Endereco.builder().logradouro("QNO 11 CONJUNTO L").numero("30").complemento("SETOR O")
+                .bairro("CEILÂNDIA").cep("72255310").cidade(c1).cliente(cli2).build();
 
         cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+        cli2.getEnderecos().addAll(Arrays.asList(e3));
 
-        clienteRepository.saveAll(Collections.singletonList(cli1));
-        enderecoRepository.saveAll(Arrays.asList(e1, e2));
+        clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+        enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
         
         //PEDIDOS
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
