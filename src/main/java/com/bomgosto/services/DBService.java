@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bomgosto.domain.Categoria;
@@ -36,6 +37,9 @@ import com.bomgosto.repositories.ProdutoRepository;
 
 @Service
 public class DBService {
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	
 	@Autowired
     private CategoriaRepository categoriaRepository;
@@ -152,7 +156,7 @@ public class DBService {
         cidadeRepository.saveAll(Collections.singletonList(c1));
 
         Cliente cli1 = new Cliente(null, "Matheus Silva", "matheusb565@gmail.com", "06680395151",
-                TipoCliente.PESSOA_FISICA);
+                TipoCliente.PESSOA_FISICA, pe.encode("123"));
         cli1.getTelefones().addAll(Arrays.asList("992706077", "991289851"));
 
         Endereco e1 = Endereco.builder().logradouro("QNO 13 CONJUNTO K").numero("09").complemento("SETOR O")

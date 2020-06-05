@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,9 @@ import com.bomgosto.services.exceptions.ObjectNotFoundException;
 @Service
 public class ClienteService {
 
+	@Autowired
+	private BCryptPasswordEncoder pe;
+	
     @Autowired
     private ClienteRepository repo;
 
@@ -79,6 +83,7 @@ public class ClienteService {
 				.email(objDTO.getEmail())
 				.cpfOuCnpj(null)
 				.tipo(null)
+				.senha(null)
 				.build();
 	}
     
@@ -89,6 +94,7 @@ public class ClienteService {
 				.email(objDTO.getEmail())
 				.cpfOuCnpj(objDTO.getCpfOuCnpj())
 				.tipo(TipoCliente.toEnum(objDTO.getTipo()))
+				.senha(pe.encode(objDTO.getSenha()))
 				.build();
 		
 		Cidade cid = Cidade.builder()
