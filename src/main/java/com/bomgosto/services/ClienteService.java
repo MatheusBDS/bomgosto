@@ -77,25 +77,12 @@ public class ClienteService {
 	}
 	
 	public Cliente fromDTO(ClienteDTO objDTO) {
-		return Cliente.builder()
-				.id(objDTO.getId())
-				.nome(objDTO.getNome())
-				.email(objDTO.getEmail())
-				.cpfOuCnpj(null)
-				.tipo(null)
-				.senha(null)
-				.build();
+		return new Cliente(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null, null);
 	}
     
 	public Cliente fromDTO(ClienteNewDTO objDTO) {
-		Cliente cli = Cliente.builder()
-				.id(null)
-				.nome(objDTO.getNome())
-				.email(objDTO.getEmail())
-				.cpfOuCnpj(objDTO.getCpfOuCnpj())
-				.tipo(TipoCliente.toEnum(objDTO.getTipo()))
-				.senha(pe.encode(objDTO.getSenha()))
-				.build();
+		Cliente cli = new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCpfOuCnpj(), 
+				TipoCliente.toEnum(objDTO.getTipo()), pe.encode(objDTO.getSenha()));
 		
 		Cidade cid = Cidade.builder()
 				.id(objDTO.getCidadeId())

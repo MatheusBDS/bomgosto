@@ -22,7 +22,6 @@ import com.bomgosto.domain.enums.Perfil;
 import com.bomgosto.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -54,6 +53,8 @@ public class Cliente implements Serializable {
     private Integer tipo;
     
     @JsonIgnore
+    @Getter
+    @Setter
     private String senha;
     
     @Getter
@@ -77,12 +78,10 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
     
-    @Builder
     public Cliente() {
     	addPerfil(Perfil.CLIENTE);
     }
     
-    @Builder
     public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
         super();
         this.id = id;
