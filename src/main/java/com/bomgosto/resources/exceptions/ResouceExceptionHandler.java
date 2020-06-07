@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bomgosto.services.exceptions.AuthorizationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -53,6 +54,17 @@ public class ResouceExceptionHandler {
 		return ResponseEntity
 				.status(HttpStatus.BAD_REQUEST)
 				.body(err);
+	}
+
+	@ExceptionHandler(AuthorizationException.class)
+	public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request){
+		return ResponseEntity
+				.status(HttpStatus.FORBIDDEN)
+				.body(StandardError.builder()
+						.status(HttpStatus.FORBIDDEN.value())
+						.msg(e.getMessage())
+						.timeStamp(System.currentTimeMillis())
+						.build());
 	}
 	
 }

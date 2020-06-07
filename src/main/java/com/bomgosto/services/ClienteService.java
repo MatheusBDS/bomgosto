@@ -1,8 +1,12 @@
 package com.bomgosto.services;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
+import com.bomgosto.domain.enums.Perfil;
+import com.bomgosto.security.UserSS;
+import com.bomgosto.services.exceptions.AuthorizationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -36,6 +40,14 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
     
     public Cliente find(Integer id) {
+
+		UserSS user = UserService.authenticated();
+
+		if(!Optional.ofNullable(user).isPresent() ||
+				!Objects.requireNonNull(user).hasRole(Perfil.ADMIN) && !id.equals(user.getId())){
+			throw new AuthorizationException("Acesso negado!");
+		}
+
         Optional<Cliente> obj = repo.findById(id);
 
         return obj.orElseThrow(() -> new ObjectNotFoundException(
