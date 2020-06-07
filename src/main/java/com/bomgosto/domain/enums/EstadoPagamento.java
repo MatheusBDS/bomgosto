@@ -16,8 +16,15 @@ public enum EstadoPagamento {
 	private String descricao;
 
 	public static EstadoPagamento toEnum(Integer cod) {
+
+		if (cod == null) {
+			return null;
+		}
+
 		for (EstadoPagamento x : EstadoPagamento.values()) {
-			return cod.equals(x.getCod()) ? x : null;
+			if (cod.equals(x.getCod())) {
+				return x;
+			}
 		}
 
 		throw new IllegalArgumentException("Id inválido: " + cod);

@@ -14,8 +14,15 @@ public enum TipoCliente {
 	private String descricao;
 
 	public static TipoCliente toEnum(Integer cod) {
+
+		if (cod == null) {
+			return null;
+		}
+
 		for (TipoCliente x : TipoCliente.values()) {
-			return cod.equals(x.getCod()) ? x : null;
+			if (cod.equals(x.getCod())) {
+				return x;
+			}
 		}
 
 		throw new IllegalArgumentException("Id inválido: " + cod);
