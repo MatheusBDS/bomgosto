@@ -6,7 +6,13 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.bomgosto.domain.Cliente;
+import com.bomgosto.security.UserSS;
+import com.bomgosto.services.exceptions.AuthorizationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.bomgosto.domain.ItemPedido;
@@ -74,14 +80,14 @@ public class PedidoService {
 		return obj;
 	}
 	
-//	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-//		UserSS user = UserService.authenticated();
-//		if (user == null) {
-//			throw new AuthorizationException("Acesso negado");
-//		}
-//		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-//		Cliente cliente =  clienteService.find(user.getId());
-//		return repo.findByCliente(cliente, pageRequest);
-//	}
+	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		UserSS user = UserService.authenticated();
+		if (!Optional.ofNullable(user).isPresent()) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+		Cliente cliente =  clienteService.find(user.getId());
+		return repo.findByCliente(cliente, pageRequest);
+	}
 
 }
