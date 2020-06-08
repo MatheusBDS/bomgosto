@@ -16,12 +16,9 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Autowired
 	private ClienteService clienteService;
 	
-	@Autowired
-	private ClienteRepository repo;
-	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Cliente cli = repo.findByEmail(email);
+		Cliente cli = clienteService.findByEmail(email);
 		
 		if( cli == null ) {
 			throw new UsernameNotFoundException(email);
