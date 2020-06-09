@@ -51,7 +51,11 @@ public class Cliente implements Serializable {
     private String cpfOuCnpj;
     
     private Integer tipo;
-    
+
+    @Getter
+    @Setter
+    private String imageUrl;
+
     @JsonIgnore
     @Getter
     @Setter
