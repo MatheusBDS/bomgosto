@@ -5,6 +5,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.bomgosto.services.exceptions.FileException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,55 +30,38 @@ public class S3Service {
     @Value("${s3.bucket}")
     private String bucketName;
 
-    public void uploadFile(String localFilePath) {
+    public URI uploadFile(MultipartFile multiPartFile) {
 
         try {
 
-            File file = new File(localFilePath);
-            LOG.info("Inicinado Upload...");
-            s3client.putObject(new PutObjectRequest(bucketName, "imagens/teste.jpg", file));
-            LOG.info("Upload finalizado!");
+            String fileName = multiPartFile.getOriginalFilename();
+            InputStream is = multiPartFile.getInputStream();
+            String contentType = multiPartFile.getContentType();
 
-        } catch (AmazonServiceException e) {
-            LOG.info("AmazonServiceException: " + e.getErrorMessage());
-            LOG.info("Status code: " + e.getStatusCode());
-        } catch (AmazonClientException e) {
-            LOG.info("AmazonClientException: " + e.getMessage());
+            return uploadFile(is, fileName, contentType);
+
+
+
+        } catch (IOException e) {
+            throw new FileException("Erro de IO: " + e.getMessage());
         }
     }
 
-//    public URI uploadFile(MultipartFile multiPartFile) {
-//
-//        try {
-//
-//            String fileName = multiPartFile.getOriginalFilename();
-//            InputStream is = multiPartFile.getInputStream();
-//            String contentType = multiPartFile.getContentType();
-//
-//            return uploadFile(is, fileName, contentType);
-//
-//
-//
-//        } catch (IOException e) {
-//            throw new FileException("Erro de IO: " + e.getMessage());
-//        }
-//    }
-//
-//    public URI uploadFile(InputStream is, String fileName, String contentType) {
-//        try {
-//
-//            ObjectMetadata meta = new ObjectMetadata();
-//            meta.setContentType(contentType);
-//
-//            LOG.info("Inicinado Upload...");
-//            s3client.putObject(bucketName, fileName, is, meta);
-//            LOG.info("Upload finalizado!");
-//
-//            return s3client.getUrl(bucketName, fileName).toURI();
-//
-//        } catch (URISyntaxException e) {
-//            throw new FileException("Erro ao converter URL para URI!");
-//        }
-//    }
+    public URI uploadFile(InputStream is, String fileName, String contentType) {
+        try {
+
+            ObjectMetadata meta = new ObjectMetadata();
+            meta.setContentType(contentType);
+
+            LOG.info("Inicinado Upload...");
+            s3client.putObject(bucketName, fileName, is, meta);
+            LOG.info("Upload finalizado!");
+
+            return s3client.getUrl(bucketName, fileName).toURI();
+
+        } catch (URISyntaxException e) {
+            throw new FileException("Erro ao converter URL para URI!");
+        }
+    }
 
 }

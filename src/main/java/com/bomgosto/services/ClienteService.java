@@ -1,5 +1,7 @@
 package com.bomgosto.services;
 
+import java.awt.image.BufferedImage;
+import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -8,6 +10,7 @@ import com.bomgosto.domain.enums.Perfil;
 import com.bomgosto.security.UserSS;
 import com.bomgosto.services.exceptions.AuthorizationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +29,7 @@ import com.bomgosto.repositories.ClienteRepository;
 import com.bomgosto.repositories.EnderecoRepository;
 import com.bomgosto.services.exceptions.DataIntegrityException;
 import com.bomgosto.services.exceptions.ObjectNotFoundException;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ClienteService {
@@ -38,7 +42,19 @@ public class ClienteService {
 
     @Autowired
 	private EnderecoRepository enderecoRepository;
-    
+
+	@Autowired
+	private S3Service s3Service;
+
+//	@Autowired
+//	private ImageService imageService;
+//
+//	@Value("${img.prefix.client.profile}")
+//	private String prefix;
+//
+//	@Value("${img.profile.size}")
+//	private Integer size;
+
     public Cliente find(Integer id) {
 
 		UserSS user = UserService.authenticated();
@@ -144,5 +160,26 @@ public class ClienteService {
 	private void updateData(Cliente newObj, Cliente obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail());
+	}
+
+	public URI uploadProfilePicture(MultipartFile multiPartFile) {
+
+//		UserSS user = UserService.authenticated();
+//
+//		if(user == null) {
+//			throw new AuthorizationException("Acesso negado!");
+//		}
+//
+//		BufferedImage jpgImage = imageService.getJpgImageFromFile(multiPartFile);
+//
+//		jpgImage = imageService.cropSquare(jpgImage);
+//		jpgImage = imageService.resize(jpgImage, size);
+//
+//		String fileName = prefix + user.getId() + ".jpg";
+
+//		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+
+		return s3Service.uploadFile(multiPartFile);
+
 	}
 }
