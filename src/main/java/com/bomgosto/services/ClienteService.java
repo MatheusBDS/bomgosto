@@ -46,12 +46,12 @@ public class ClienteService {
 	@Autowired
 	private S3Service s3Service;
 
-//	@Autowired
-//	private ImageService imageService;
-//
-//	@Value("${img.prefix.client.profile}")
-//	private String prefix;
-//
+	@Autowired
+	private ImageService imageService;
+
+	@Value("${img.prefix.client.profile}")
+	private String prefix;
+
 //	@Value("${img.profile.size}")
 //	private Integer size;
 
@@ -169,22 +169,14 @@ public class ClienteService {
 		if(user == null) {
 			throw new AuthorizationException("Acesso negado!");
 		}
-//
-//		BufferedImage jpgImage = imageService.getJpgImageFromFile(multiPartFile);
-//
+
+		BufferedImage jpgImage = imageService.getJpgImageFromFile(multiPartFile);
+
 //		jpgImage = imageService.cropSquare(jpgImage);
 //		jpgImage = imageService.resize(jpgImage, size);
-//
-//		String fileName = prefix + user.getId() + ".jpg";
 
-//		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+		String fileName = prefix + user.getId() + ".jpg";
 
-		URI uri = s3Service.uploadFile(multiPartFile);
-
-		Optional<Cliente> cli = repo.findById(user.getId());
-		cli.get().setImageUrl(uri.toString());
-		repo.save(cli.get());
-
-		return uri;
+		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
 	}
 }

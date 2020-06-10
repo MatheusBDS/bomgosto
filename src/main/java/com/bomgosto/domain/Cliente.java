@@ -52,10 +52,6 @@ public class Cliente implements Serializable {
     
     private Integer tipo;
 
-    @Getter
-    @Setter
-    private String imageUrl;
-
     @JsonIgnore
     @Getter
     @Setter
