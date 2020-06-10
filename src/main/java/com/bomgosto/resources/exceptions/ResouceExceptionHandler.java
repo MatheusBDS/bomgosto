@@ -26,9 +26,11 @@ public class ResouceExceptionHandler {
 		return ResponseEntity
 				.status(HttpStatus.NOT_FOUND)
 				.body(StandardError.builder()
-						.status(HttpStatus.NOT_FOUND.value())
-						.msg(e.getMessage())
 						.timeStamp(System.currentTimeMillis())
+						.status(HttpStatus.NOT_FOUND.value())
+						.message("Não encontrado!")
+						.error(e.getMessage())
+						.path(request.getRequestURI())
 						.build());
 	}
 	
@@ -37,9 +39,11 @@ public class ResouceExceptionHandler {
 		return ResponseEntity
 				.status(HttpStatus.BAD_REQUEST)
 				.body(StandardError.builder()
-						.status(HttpStatus.BAD_REQUEST.value())
-						.msg(e.getMessage())
 						.timeStamp(System.currentTimeMillis())
+						.status(HttpStatus.BAD_REQUEST.value())
+						.message("Ingridade de dados!")
+						.error(e.getMessage())
+						.path(request.getRequestURI())
 						.build());
 	}
 	
@@ -47,16 +51,18 @@ public class ResouceExceptionHandler {
 	public ResponseEntity<ValidationError> validation(MethodArgumentNotValidException e, HttpServletRequest request){
 		
 		ValidationError err = ValidationError.builder()
-				.status(HttpStatus.BAD_REQUEST.value())
-				.msg("Erro de validação")
 				.timeStamp(System.currentTimeMillis())
+				.status(HttpStatus.UNPROCESSABLE_ENTITY.value())
+				.message("Erro de validação!")
+				.error(e.getMessage())
+				.path(request.getRequestURI())
 				.erros(new ArrayList<>())
 				.build();
 		
 		e.getBindingResult().getFieldErrors().forEach( (fe) -> err.addError(fe.getField(), fe.getDefaultMessage()) );
 		
 		return ResponseEntity
-				.status(HttpStatus.BAD_REQUEST)
+				.status(HttpStatus.UNPROCESSABLE_ENTITY)
 				.body(err);
 	}
 
@@ -65,9 +71,11 @@ public class ResouceExceptionHandler {
 		return ResponseEntity
 				.status(HttpStatus.FORBIDDEN)
 				.body(StandardError.builder()
-						.status(HttpStatus.FORBIDDEN.value())
-						.msg(e.getMessage())
 						.timeStamp(System.currentTimeMillis())
+						.status(HttpStatus.FORBIDDEN.value())
+						.message("Acesso negado!")
+						.error(e.getMessage())
+						.path(request.getRequestURI())
 						.build());
 	}
 
@@ -76,9 +84,11 @@ public class ResouceExceptionHandler {
 		return ResponseEntity
 				.status(HttpStatus.BAD_REQUEST)
 				.body(StandardError.builder()
-						.status(HttpStatus.BAD_REQUEST.value())
-						.msg(e.getMessage())
 						.timeStamp(System.currentTimeMillis())
+						.status(HttpStatus.BAD_REQUEST.value())
+						.message("Erro de arquivo!")
+						.error(e.getMessage())
+						.path(request.getRequestURI())
 						.build());
 	}
 
@@ -88,9 +98,11 @@ public class ResouceExceptionHandler {
 		return ResponseEntity
 				.status(code)
 				.body(StandardError.builder()
-						.status(code.value())
-						.msg(e.getMessage())
 						.timeStamp(System.currentTimeMillis())
+						.status(HttpStatus.BAD_REQUEST.value())
+						.message("Erro Amazon Service!")
+						.error(e.getMessage())
+						.path(request.getRequestURI())
 						.build());
 	}
 
@@ -99,9 +111,11 @@ public class ResouceExceptionHandler {
 		return ResponseEntity
 				.status(HttpStatus.BAD_REQUEST)
 				.body(StandardError.builder()
-						.status(HttpStatus.BAD_REQUEST.value())
-						.msg(e.getMessage())
 						.timeStamp(System.currentTimeMillis())
+						.status(HttpStatus.BAD_REQUEST.value())
+						.message("Erro Amazon Client!")
+						.error(e.getMessage())
+						.path(request.getRequestURI())
 						.build());
 	}
 
@@ -110,9 +124,11 @@ public class ResouceExceptionHandler {
 		return ResponseEntity
 				.status(HttpStatus.BAD_REQUEST)
 				.body(StandardError.builder()
-						.status(HttpStatus.BAD_REQUEST.value())
-						.msg(e.getMessage())
 						.timeStamp(System.currentTimeMillis())
+						.status(HttpStatus.BAD_REQUEST.value())
+						.message("Erro Amazon S3!")
+						.error(e.getMessage())
+						.path(request.getRequestURI())
 						.build());
 	}
 }
