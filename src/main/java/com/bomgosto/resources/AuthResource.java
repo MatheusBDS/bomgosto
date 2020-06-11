@@ -5,6 +5,7 @@ import com.bomgosto.security.JWTUtil;
 import com.bomgosto.security.UserSS;
 import com.bomgosto.services.AuthService;
 import com.bomgosto.services.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ public class AuthResource {
     @Autowired
     private AuthService authService;
 
+    @ApiOperation(value = "Atualiza token já existente")
     @PostMapping(value = "/refresh_token")
     public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
         UserSS user = UserService.authenticated();
@@ -35,6 +37,7 @@ public class AuthResource {
         return ResponseEntity.noContent().build();
     }
 
+    @ApiOperation(value = "Envia senha nova por email")
     @PostMapping(value = "/forgot")
     public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO objDTO) {
         authService.sendNewPassword(objDTO.getEmail());

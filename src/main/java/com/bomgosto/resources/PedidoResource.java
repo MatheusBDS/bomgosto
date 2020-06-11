@@ -9,6 +9,7 @@ import com.bomgosto.domain.Produto;
 import com.bomgosto.dto.CategoriaDTO;
 import com.bomgosto.dto.ProdutoDTO;
 import com.bomgosto.resources.utils.URL;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +26,14 @@ public class PedidoResource {
     @Autowired
     PedidoService service;
 
+    @ApiOperation(value = "Busca pedido por id")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Pedido> find(@PathVariable Integer id) {
         Pedido obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
-    
+
+    @ApiOperation(value = "Insere pedido")
     @PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj) {
 		obj = service.insert(obj);
@@ -41,6 +44,7 @@ public class PedidoResource {
 		return ResponseEntity.created(uri).build();
 	}
 
+    @ApiOperation(value = "Retorna pedidos por cliente com paginação")
     @GetMapping
     public ResponseEntity<Page<Pedido>> findPage(
             @RequestParam(value = "page", defaultValue = "0") Integer page,

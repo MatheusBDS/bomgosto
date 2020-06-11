@@ -2,6 +2,7 @@ package com.bomgosto.resources;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +24,14 @@ public class ProdutoResource {
     @Autowired
     ProdutoService service;
 
+	@ApiOperation(value = "Busca produto por id")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Produto> find(@PathVariable Integer id) {
         Produto obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
-    
+
+	@ApiOperation(value = "Retorna produtos por categoria com paginação")
     @GetMapping
 	public ResponseEntity<Page<ProdutoDTO>> findPage(
 			@RequestParam(value="nome", defaultValue="") String nome, 

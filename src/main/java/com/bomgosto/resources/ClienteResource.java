@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -34,18 +35,21 @@ public class ClienteResource {
     @Autowired
     ClienteService service;
 
+	@ApiOperation(value = "Busca cliente por id")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Cliente> find(@PathVariable Integer id) {
         Cliente obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
 
+	@ApiOperation(value = "Busca cliente por email")
 	@GetMapping(value = "/email")
 	public ResponseEntity<Cliente> find(@RequestParam(value = "value") String email) {
 		Cliente obj = service.findByEmail(email);
 		return ResponseEntity.ok().body(obj);
 	}
 
+	@ApiOperation(value = "Insere cliente")
     @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
 		Cliente obj = service.fromDTO(objDto);
@@ -57,7 +61,8 @@ public class ClienteResource {
 		
 		return ResponseEntity.created(uri).build();
 	}
-    
+
+	@ApiOperation(value = "Atualiza cliente")
     @PutMapping(value = "/{id}")
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDTO, @PathVariable Integer id) {
 		Cliente obj = service.fromDTO(objDTO);
@@ -68,6 +73,7 @@ public class ClienteResource {
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
+	@ApiOperation(value = "Remove cliente")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
@@ -76,6 +82,7 @@ public class ClienteResource {
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
+	@ApiOperation(value = "Retorna todos clientes")
 	@GetMapping
 	public ResponseEntity<List<ClienteDTO>> findAll() {
 		List<ClienteDTO> listDTO = service.findAll().stream().map(obj -> ClienteDTO.builder().obj(obj).build())
@@ -85,6 +92,7 @@ public class ClienteResource {
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
+	@ApiOperation(value = "Retorna todos clientes com paginação")
 	@GetMapping(value = "/page")
 	public ResponseEntity<Page<ClienteDTO>> findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -97,6 +105,7 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 
+	@ApiOperation(value = "Salva imagem do cliente")
 	@PostMapping(value = "/picture")
 	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name = "file") MultipartFile file){
 

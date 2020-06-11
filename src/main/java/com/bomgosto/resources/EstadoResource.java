@@ -4,6 +4,7 @@ import com.bomgosto.dto.CidadeDTO;
 import com.bomgosto.dto.EstadoDTO;
 import com.bomgosto.services.CidadeService;
 import com.bomgosto.services.EstadoService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +25,14 @@ public class EstadoResource {
     @Autowired
     private CidadeService cidadeService;
 
+    @ApiOperation(value = "Retorna todos estados")
     @GetMapping
     public ResponseEntity<List<EstadoDTO>> findAll(){
         List<EstadoDTO> listDTO = service.findAll().stream().map(EstadoDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDTO);
     }
 
+    @ApiOperation(value = "Retorna todas as cidades por estado")
     @GetMapping("/{estadoId}/cidades")
     public ResponseEntity<List<CidadeDTO>> findCidades(@PathVariable Integer estadoId){
         List<CidadeDTO> listDTO = cidadeService.findByEstado(estadoId).stream().map(CidadeDTO::new).collect(Collectors.toList());
