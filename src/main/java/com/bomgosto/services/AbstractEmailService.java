@@ -18,7 +18,7 @@ import com.bomgosto.domain.Pedido;
 
 public abstract class AbstractEmailService implements EmailService{
 
-	@Value("defaul.sender")
+	@Value("default.sender")
 	private String sender;
 	
 	@Autowired
