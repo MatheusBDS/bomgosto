@@ -1,14 +1,18 @@
 package com.bomgosto.services;
 
-import java.awt.image.BufferedImage;
-import java.net.URI;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
+import com.bomgosto.domain.Cidade;
+import com.bomgosto.domain.Cliente;
+import com.bomgosto.domain.Endereco;
 import com.bomgosto.domain.enums.Perfil;
+import com.bomgosto.domain.enums.TipoCliente;
+import com.bomgosto.dto.ClienteDTO;
+import com.bomgosto.dto.ClienteNewDTO;
+import com.bomgosto.repositories.ClienteRepository;
+import com.bomgosto.repositories.EnderecoRepository;
 import com.bomgosto.security.UserSS;
 import com.bomgosto.services.exceptions.AuthorizationException;
+import com.bomgosto.services.exceptions.DataIntegrityException;
+import com.bomgosto.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,18 +22,13 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.bomgosto.domain.Cidade;
-import com.bomgosto.domain.Cliente;
-import com.bomgosto.domain.Endereco;
-import com.bomgosto.domain.enums.TipoCliente;
-import com.bomgosto.dto.ClienteDTO;
-import com.bomgosto.dto.ClienteNewDTO;
-import com.bomgosto.repositories.ClienteRepository;
-import com.bomgosto.repositories.EnderecoRepository;
-import com.bomgosto.services.exceptions.DataIntegrityException;
-import com.bomgosto.services.exceptions.ObjectNotFoundException;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.awt.image.BufferedImage;
+import java.net.URI;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -175,7 +174,7 @@ public class ClienteService {
 		jpgImage = imageService.cropSquare(jpgImage);
 		jpgImage = imageService.resize(jpgImage, size);
 
-		String fileName = prefix + user.getId() + ".jpg";
+		String fileName = "imagens/clientes/" + prefix + user.getId() + ".jpg";
 
 		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
 	}

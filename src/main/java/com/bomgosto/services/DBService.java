@@ -72,66 +72,66 @@ public class DBService {
 	public void instantiateTestDatabase() throws ParseException{
 		// PRODUTOS
         Produto p1 = Produto.builder().nome("Pizza de Calabresa").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(33.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p2 = Produto.builder().nome("Pizza de Frango").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(33.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p3 = Produto.builder().nome("Suco de Laranja").tamanho("500").unidadeMedida("Mililitros")
-                .precoUnitario(new BigDecimal(3)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(3)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p4 = Produto.builder().nome("Suco de Maracujá").tamanho("500").unidadeMedida("Mililitros")
-                .precoUnitario(new BigDecimal(3)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(3)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p5 = Produto.builder().nome("Isca de Peixe").tamanho("N/A").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(39.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(39.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p6 = Produto.builder().nome("Picanha na Chapa").tamanho("N/A").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(99.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(99.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p7 = Produto.builder().nome("Camarão Cremoso").tamanho("N/A").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(99.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(99.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p8 = Produto.builder().nome("Peito de Frango").tamanho("N/A").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(23.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(23.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p9 = Produto.builder().nome("Lasanha de Carne").tamanho("N/A").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(29.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(29.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p10 = Produto.builder().nome("X-Bom Gosto").tamanho("N/A").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(18.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(18.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p11 = Produto.builder().nome("Foundue de Morango").tamanho("N/A").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(12.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(12.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p12 = Produto.builder().nome("Champagne Chandon").tamanho("N/A").unidadeMedida("Mililitros")
-                .precoUnitario(new BigDecimal(129.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(129.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p13 = Produto.builder().nome("Chopp Brahma").tamanho("N/A").unidadeMedida("Mililitros")
-                .precoUnitario(new BigDecimal(5.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(5.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
         Produto p14 = Produto.builder().nome("Carne Seca").tamanho("N/A").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(19.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+                .precoUnitario(BigDecimal.valueOf(19.90)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
 
-        Produto p15 = Produto.builder().nome("Pizza 15").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p16 = Produto.builder().nome("Pizza 16").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p17 = Produto.builder().nome("Pizza 17").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p18 = Produto.builder().nome("Pizza 18").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p19 = Produto.builder().nome("Pizza 19").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p20 = Produto.builder().nome("Pizza 20").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p21 = Produto.builder().nome("Pizza 21").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p22 = Produto.builder().nome("Pizza 22").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p23 = Produto.builder().nome("Pizza 23").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p24 = Produto.builder().nome("Pizza 24").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p25 = Produto.builder().nome("Pizza 25").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p26 = Produto.builder().nome("Pizza 26").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p27 = Produto.builder().nome("Pizza 27").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p28 = Produto.builder().nome("Pizza 28").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p29 = Produto.builder().nome("Pizza 29").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
-        Produto p30 = Produto.builder().nome("Pizza 30").tamanho("Grande").unidadeMedida("Gramas")
-                .precoUnitario(new BigDecimal(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p15 = Produto.builder().nome("Pizza 15").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p16 = Produto.builder().nome("Pizza 16").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p17 = Produto.builder().nome("Pizza 17").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p18 = Produto.builder().nome("Pizza 18").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p19 = Produto.builder().nome("Pizza 19").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p20 = Produto.builder().nome("Pizza 20").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p21 = Produto.builder().nome("Pizza 21").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p22 = Produto.builder().nome("Pizza 22").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p23 = Produto.builder().nome("Pizza 23").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p24 = Produto.builder().nome("Pizza 24").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p25 = Produto.builder().nome("Pizza 25").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p26 = Produto.builder().nome("Pizza 26").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p27 = Produto.builder().nome("Pizza 27").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p28 = Produto.builder().nome("Pizza 28").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p29 = Produto.builder().nome("Pizza 29").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
+//        Produto p30 = Produto.builder().nome("Pizza 30").tamanho("Grande").unidadeMedida("Gramas")
+//                .precoUnitario(BigDecimal.valueOf(30)).categorias(new ArrayList<>()).itens(new HashSet<>()).build();
 
         // CATEGORIAS
         Categoria cat1 = Categoria.builder().nome("Pizzas").produtos(new ArrayList<>()).build();
@@ -161,7 +161,7 @@ public class DBService {
         cat11.getProdutos().addAll(Arrays.asList(p3, p4));
         cat12.getProdutos().addAll(Collections.singletonList(p13));
 
-        cat1.getProdutos().addAll(Arrays.asList(p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30));
+//        cat1.getProdutos().addAll(Arrays.asList(p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30));
 
         p1.getCategorias().addAll(Collections.singletonList(cat1));
         p2.getCategorias().addAll(Collections.singletonList(cat1));
@@ -178,28 +178,28 @@ public class DBService {
         p13.getCategorias().addAll(Collections.singletonList(cat12));
         p14.getCategorias().addAll(Collections.singletonList(cat9));
 
-        p15.getCategorias().add(cat1);
-        p16.getCategorias().add(cat1);
-        p17.getCategorias().add(cat1);
-        p18.getCategorias().add(cat1);
-        p19.getCategorias().add(cat1);
-        p20.getCategorias().add(cat1);
-        p21.getCategorias().add(cat1);
-        p22.getCategorias().add(cat1);
-        p23.getCategorias().add(cat1);
-        p24.getCategorias().add(cat1);
-        p25.getCategorias().add(cat1);
-        p26.getCategorias().add(cat1);
-        p27.getCategorias().add(cat1);
-        p28.getCategorias().add(cat1);
-        p29.getCategorias().add(cat1);
-        p30.getCategorias().add(cat1);
+//        p15.getCategorias().add(cat1);
+//        p16.getCategorias().add(cat1);
+//        p17.getCategorias().add(cat1);
+//        p18.getCategorias().add(cat1);
+//        p19.getCategorias().add(cat1);
+//        p20.getCategorias().add(cat1);
+//        p21.getCategorias().add(cat1);
+//        p22.getCategorias().add(cat1);
+//        p23.getCategorias().add(cat1);
+//        p24.getCategorias().add(cat1);
+//        p25.getCategorias().add(cat1);
+//        p26.getCategorias().add(cat1);
+//        p27.getCategorias().add(cat1);
+//        p28.getCategorias().add(cat1);
+//        p29.getCategorias().add(cat1);
+//        p30.getCategorias().add(cat1);
 
 
         categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, cat9, cat10, cat11, cat12));
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14));
 
-        produtoRepository.saveAll(Arrays.asList(p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30));
+//        produtoRepository.saveAll(Arrays.asList(p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30));
 
         // ESTADOS
         Estado est1 = Estado.builder().nome("Distrito Federal").cidades(new ArrayList<>()).build();

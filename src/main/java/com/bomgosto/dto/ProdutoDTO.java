@@ -29,6 +29,8 @@ public class ProdutoDTO implements Serializable {
 	private BigDecimal precoUnitario;
 
 	private String imagem;
+
+	private String descricao;
 	
 	@Builder
 	public ProdutoDTO(Produto obj) {
@@ -38,6 +40,7 @@ public class ProdutoDTO implements Serializable {
 		unidadeMedida = obj.getUnidadeMedida();
 		precoUnitario = obj.getPrecoUnitario();
 		imagem = obj.getImagem();
+		descricao = obj.getDescricao();
 	}
 
 }

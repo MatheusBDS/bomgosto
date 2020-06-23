@@ -1,14 +1,7 @@
 package com.bomgosto.resources;
 
-import java.net.URI;
-import java.util.List;
-
-import javax.validation.Valid;
-
-import com.bomgosto.domain.Produto;
-import com.bomgosto.dto.CategoriaDTO;
-import com.bomgosto.dto.ProdutoDTO;
-import com.bomgosto.resources.utils.URL;
+import com.bomgosto.domain.Pedido;
+import com.bomgosto.services.PedidoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.bomgosto.domain.Pedido;
-import com.bomgosto.services.PedidoService;
+import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -35,14 +28,14 @@ public class PedidoResource {
 
     @ApiOperation(value = "Insere pedido")
     @PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj) {
-		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}")
-				.buildAndExpand(obj.getId()).toUri();
+    public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj) {
+        obj = service.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(obj.getId()).toUri();
 
-		return ResponseEntity.created(uri).build();
-	}
+        return ResponseEntity.created(uri).build();
+    }
 
     @ApiOperation(value = "Retorna pedidos por cliente com paginação")
     @GetMapping
