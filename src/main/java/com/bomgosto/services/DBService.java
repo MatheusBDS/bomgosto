@@ -1,5 +1,14 @@
 package com.bomgosto.services;
 
+import com.bomgosto.domain.*;
+import com.bomgosto.domain.enums.EstadoPagamento;
+import com.bomgosto.domain.enums.Perfil;
+import com.bomgosto.domain.enums.TipoCliente;
+import com.bomgosto.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,34 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-
-import com.bomgosto.domain.Categoria;
-import com.bomgosto.domain.Cidade;
-import com.bomgosto.domain.Cliente;
-import com.bomgosto.domain.Endereco;
-import com.bomgosto.domain.Estado;
-import com.bomgosto.domain.ItemPedido;
-import com.bomgosto.domain.Pagamento;
-import com.bomgosto.domain.PagamentoComCartao;
-import com.bomgosto.domain.PagamentoComDinheiro;
-import com.bomgosto.domain.Pedido;
-import com.bomgosto.domain.Produto;
-import com.bomgosto.domain.enums.EstadoPagamento;
-import com.bomgosto.domain.enums.Perfil;
-import com.bomgosto.domain.enums.TipoCliente;
-import com.bomgosto.repositories.CategoriaRepository;
-import com.bomgosto.repositories.CidadeRepository;
-import com.bomgosto.repositories.ClienteRepository;
-import com.bomgosto.repositories.EnderecoRepository;
-import com.bomgosto.repositories.EstadoRepository;
-import com.bomgosto.repositories.ItemPedidoRepository;
-import com.bomgosto.repositories.PagamentoRepository;
-import com.bomgosto.repositories.PedidoRepository;
-import com.bomgosto.repositories.ProdutoRepository;
 
 @Service
 public class DBService {

@@ -1,20 +1,12 @@
 package com.bomgosto.dto;
 
-import java.io.Serializable;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Length;
-
 import com.bomgosto.domain.Cliente;
 import com.bomgosto.services.validation.ClienteUpdate;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.validation.constraints.Email;
+import java.io.Serializable;
 
 @ClienteUpdate
 @Getter
@@ -26,13 +18,17 @@ public class ClienteDTO implements Serializable {
 
 	private Integer id;
 
-	@NotEmpty(message = "Preenchimento obrigatório")
+//	@NotEmpty(message = "Preenchimento obrigatório")
 	@Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 80 caracteres")
 	private String nome;
 
-	@NotEmpty(message = "Preenchimento obrigatório")
+//	@NotEmpty(message = "Preenchimento obrigatório")
 	@Email(message = "Email inválido")
 	private String email;
+
+	private String senhaAtual;
+
+	private String senhaNova;
 	
 	@Builder
 	public ClienteDTO(Cliente obj) {

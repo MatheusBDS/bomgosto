@@ -7,6 +7,7 @@ import com.bomgosto.domain.enums.Perfil;
 import com.bomgosto.domain.enums.TipoCliente;
 import com.bomgosto.dto.ClienteDTO;
 import com.bomgosto.dto.ClienteNewDTO;
+import com.bomgosto.dto.EnderecoDTO;
 import com.bomgosto.repositories.ClienteRepository;
 import com.bomgosto.repositories.EnderecoRepository;
 import com.bomgosto.security.UserSS;
@@ -78,7 +79,7 @@ public class ClienteService {
 		return obj;
 	}
     
-    public Cliente update(Cliente obj) {
+    public Cliente update(ClienteDTO obj) {
     	Cliente newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return repo.save(newObj);
@@ -155,10 +156,78 @@ public class ClienteService {
 		
 		return cli;
 	}
-	
-	private void updateData(Cliente newObj, Cliente obj) {
-		newObj.setNome(obj.getNome());
-		newObj.setEmail(obj.getEmail());
+
+	public Endereco addEndereco(Integer clienteId, EnderecoDTO newEndereco) {
+		Cliente cli = find(clienteId);
+
+		Endereco endereco = fromDTO(newEndereco, cli);
+
+		if(!verificaEnderecoExistente(cli, newEndereco)){
+			cli.getEnderecos().add(endereco);
+			enderecoRepository.save(endereco);
+		}
+
+		return endereco;
+	}
+
+	private Endereco fromDTO(EnderecoDTO enderecoDTO, Cliente cliente){
+
+		Cidade cidade = Cidade.builder()
+				.id(enderecoDTO.getCidade())
+				.nome(null)
+				.estado(null)
+				.build();
+
+		return Endereco.builder()
+				.id(null)
+				.logradouro(enderecoDTO.getLogradouro())
+				.numero(enderecoDTO.getNumero())
+				.complemento(enderecoDTO.getComplemento())
+				.bairro(enderecoDTO.getBairro())
+				.cep(enderecoDTO.getCep())
+				.cliente(cliente)
+				.cidade(cidade)
+				.build();
+	}
+
+	private boolean verificaEnderecoExistente(Cliente cliente, EnderecoDTO newEndereco){
+
+    	for (Endereco endereco : cliente.getEnderecos()){
+    		if(endereco.getCep().equals(newEndereco.getCep())){
+    			return true;
+			}
+		}
+
+    	return false;
+	}
+
+	private void updateData(Cliente newObj, ClienteDTO obj) {
+		if(Optional.ofNullable(obj.getNome()).isPresent()){newObj.setNome(obj.getNome());}
+		if(Optional.ofNullable(obj.getEmail()).isPresent()){newObj.setEmail(obj.getEmail());}
+		updateSenha(newObj, obj);
+	}
+
+	private void updateSenha(Cliente newObj, ClienteDTO clienteDTO) {
+		if(verificaSenha(newObj, clienteDTO.getSenhaAtual(), clienteDTO.getSenhaNova())) {
+			newObj.setSenha(pe.encode(clienteDTO.getSenhaNova()));
+		}else{
+			throw new DataIntegrityException("Não foi possível atualizar senha!");
+		}
+	}
+
+	private boolean verificaSenha(Cliente cliente, String senhaAtual, String senhaNova){
+
+    	Cliente cli = find(cliente.getId());
+
+		if(!pe.matches(senhaAtual, cli.getSenha())){
+			throw new DataIntegrityException("Senha atual não confere!");
+		}
+
+		if(senhaNova.equals(senhaAtual)){
+			throw new DataIntegrityException("Senha nova deve ser diferente da atual!");
+		}
+
+    	return true;
 	}
 
 	public URI uploadProfilePicture(MultipartFile multiPartFile) {
